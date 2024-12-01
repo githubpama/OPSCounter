@@ -5,8 +5,84 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CMI_TimeCounter"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="CMI TimeCounter" Height="600" Width="1000">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
+        <!-- Steuerungsbereich oben -->
+        <StackPanel Grid.Row="0" Margin="10">
+            <Button x:Name="btnAddCounter" Content="Neuer Counter" 
+                    Click="BtnAddCounter_Click" 
+                    Width="150" HorizontalAlignment="Left" 
+                    Margin="0,0,0,10"/>
+        </StackPanel>
+
+        <!-- Liste der Counter -->
+        <ScrollViewer Grid.Row="1" Margin="10">
+            <ItemsControl x:Name="counterList">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderBrush="LightGray" BorderThickness="1" 
+                                Margin="0,0,0,10" Padding="10" 
+                                Background="WhiteSmoke">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Grid.Row="0" 
+                                         Text="{Binding Title}" 
+                                         FontWeight="Bold" 
+                                         FontSize="16"/>
+                                
+                                <TextBlock Grid.Row="1" 
+                                         Text="{Binding Description}" 
+                                         Margin="0,5"/>
+                                
+                                <StackPanel Grid.Row="2" 
+                                          Orientation="Horizontal" 
+                                          Margin="0,10,0,0">
+                                    <TextBlock Text="{Binding ElapsedTime}" 
+                                             FontFamily="Consolas" 
+                                             FontSize="20" 
+                                             VerticalAlignment="Center"
+                                             Margin="0,0,20,0"/>
+                                    
+                                    <Button Content="Start" 
+                                            Click="BtnStart_Click" 
+                                            Tag="{Binding Id}" 
+                                            Width="80" 
+                                            Margin="0,0,10,0"
+                                            Visibility="{Binding StartButtonVisibility}"/>
+                                    
+                                    <Button Content="Stop" 
+                                            Click="BtnStop_Click" 
+                                            Tag="{Binding Id}" 
+                                            Width="80" 
+                                            Margin="0,0,10,0"
+                                            Visibility="{Binding StopButtonVisibility}"/>
+                                    
+                                    <Button Content="Reset" 
+                                            Click="BtnReset_Click" 
+                                            Tag="{Binding Id}" 
+                                            Width="80" 
+                                            Margin="0,0,10,0"/>
+                                    
+                                    <Button Content="Löschen" 
+                                            Click="BtnDelete_Click" 
+                                            Tag="{Binding Id}" 
+                                            Width="80"/>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
     </Grid>
 </Window>
